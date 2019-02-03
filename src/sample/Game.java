@@ -8,7 +8,6 @@ public class Game {
     private boolean secondPlayerTurn;
     private List<Integer> code;
     private boolean isWinner;
-    private boolean onePlayerGame;
 
 
     public Game() {
@@ -51,7 +50,7 @@ public class Game {
     }
     public void setCode(int length){
         Random random = new Random();
-        code = new LinkedList<>();
+        code = new ArrayList<>();
         Set<Integer> generated = new LinkedHashSet<>();
         while (generated.size() < length)
         {

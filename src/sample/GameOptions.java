@@ -66,7 +66,7 @@ public class GameOptions {
     }
 
 
-    public int getChoice() {
+    public int getNumberOfColumns() {
         choice = (int) numberOfRowsComboBox.valueProperty().get();
         return choice;
     }

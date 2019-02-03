@@ -10,14 +10,14 @@ public class Controller extends Application {
     public void start(Stage stage) throws Exception {
         GameOptions gameOptions = new GameOptions();
 
-        Board board = new Board(gameOptions.getChoice()+1, 4, gameOptions.twoPlayersGame());
+        Board board = new Board(gameOptions.getNumberOfColumns()+1, 4, gameOptions.twoPlayersGame());
         if (gameOptions.twoPlayersGame()) {
             board.setActiveRow(0);
         }
         else {
-            board.setActiveRow(gameOptions.getChoice());
+            board.setActiveRow(gameOptions.getNumberOfColumns());
         }
-        Scene scene = new Scene(board, 450, gameOptions.getChoice()*1.2*65);
+        Scene scene = new Scene(board, 450, gameOptions.getNumberOfColumns()*1.2*65);
 
         stage.setScene(scene);
         stage.setResizable(false);
