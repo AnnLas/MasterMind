@@ -51,13 +51,19 @@ public class Game {
     }
     public void setCode(int length){
         Random random = new Random();
+        code = new LinkedList<>();
         Set<Integer> generated = new LinkedHashSet<>();
         while (generated.size() < length)
         {
             Integer next = random.nextInt(6) + 1;
             generated.add(next);
+            System.out.println(next);
         }
-        this.code = (List<Integer>) generated;
+        for (Integer number:generated) {
+            code.add(number);
+        }
+
+
     }
 
     public void setSecondPlayerTurn(boolean secondPlayerTurn) {
@@ -70,5 +76,9 @@ public class Game {
 
     public boolean isWinner() {
         return isWinner;
+    }
+
+    public List<Integer> getCode() {
+        return code;
     }
 }

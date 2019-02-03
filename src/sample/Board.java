@@ -16,11 +16,15 @@ public class Board extends Pane {
     private Game game;
     private ArrayList<Integer> providedCode;
     private Button startGameButton;
+    private Boolean twoPlayersGame;
 
-    public Board(int numberOfRows, int numberOfColumns) {
+    public Board(int numberOfRows, int numberOfColumns, boolean twoPlayersGame) {
         game = new Game();
+
+        this.twoPlayersGame = twoPlayersGame;
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
+
         slots = new Slot[numberOfColumns][numberOfRows];
         hints = new Hint[numberOfRows];
         setPrefSize(600, 600);
@@ -45,7 +49,21 @@ public class Board extends Pane {
 
         addComponents();
 
+        if (!twoPlayersGame){
+            twoPlayersGameOption();
+        }
 
+    }
+
+    private void twoPlayersGameOption() {
+        game.setSecondPlayerTurn(true);
+        startGameButton.setText("New game");
+        game.setCode(numberOfColumns);
+        activeRow = numberOfRows-1;
+        for (int i = 0; i < numberOfColumns; i++) {
+            slots[i][0].setDigit(game.getCode().get(i));
+            slots[i][0].setHidden();
+        }
     }
 
     private void addComponents() {
@@ -142,7 +160,7 @@ public class Board extends Pane {
                 providedCode.add(slots[i][activeRow].getDigit());
             }
         }
-        if (activeRow == 0) {
+        if (activeRow == 0 && twoPlayersGame) {
             game.setCode(providedCode);
         } else {
             hints[activeRow].setHint(game.checkMatch(providedCode)[0], game.checkMatch(providedCode)[1]);
@@ -175,6 +193,7 @@ public class Board extends Pane {
 
     public void prepareBoard() {
         game = new Game();
+
         activeRow = 0;
         for (int i = 0; i < numberOfRows; i++) {
             for (int j = 0; j < numberOfColumns; j++) {
@@ -191,6 +210,9 @@ public class Board extends Pane {
 
         }
         startGameButton.setText("Start");
+        if (!twoPlayersGame){
+            twoPlayersGameOption();
+        }
         setActiveRow(activeRow);
 
 

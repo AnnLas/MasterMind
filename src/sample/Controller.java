@@ -8,11 +8,19 @@ import javafx.stage.Stage;
 public class Controller extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        NumberOfRowsChooser numberOfRowsChooser = new NumberOfRowsChooser();
-        Board board = new Board(numberOfRowsChooser.getChoice()+1, 4);
-        board.setActiveRow(0);
-        Scene scene = new Scene(board, 400, numberOfRowsChooser.getChoice()*1.2*65);
+        GameOptions gameOptions = new GameOptions();
+
+        Board board = new Board(gameOptions.getChoice()+1, 4, gameOptions.twoPlayersGame());
+        if (gameOptions.twoPlayersGame()) {
+            board.setActiveRow(0);
+        }
+        else {
+            board.setActiveRow(gameOptions.getChoice());
+        }
+        Scene scene = new Scene(board, 450, gameOptions.getChoice()*1.2*65);
+
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
 
 
