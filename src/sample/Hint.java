@@ -9,10 +9,11 @@ public class Hint extends GridPane {
     private int numberOfDigits = 4;
 
 
-    public Hint() {
+    public Hint(int digitsNumber) {
+        this.numberOfDigits = digitsNumber;
         setAlignment(Pos.CENTER);
         for (int i = 0; i < numberOfDigits / 2; i++) {
-            for (int j = 0; j < numberOfDigits / 2; j++) {
+            for (int j = 0; j < numberOfDigits /2; j++) {
                 add(new ImageView("images/smaller_hole.png"), i, j);
 
             }

@@ -1,15 +1,14 @@
 package sample;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Game {
     private boolean isRunning;
     private boolean secondPlayerTurn;
     private List<Integer> code;
     private boolean isWinner;
+    private boolean onePlayerGame;
 
 
     public Game() {
@@ -49,6 +48,16 @@ public class Game {
 
     public void setCode(List<Integer> code) {
         this.code = code;
+    }
+    public void setCode(int length){
+        Random random = new Random();
+        Set<Integer> generated = new LinkedHashSet<>();
+        while (generated.size() < length)
+        {
+            Integer next = random.nextInt(6) + 1;
+            generated.add(next);
+        }
+        this.code = (List<Integer>) generated;
     }
 
     public void setSecondPlayerTurn(boolean secondPlayerTurn) {

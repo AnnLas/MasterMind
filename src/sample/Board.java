@@ -5,7 +5,6 @@ import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-
 import java.util.ArrayList;
 
 public class Board extends Pane {
@@ -33,7 +32,7 @@ public class Board extends Pane {
 
                 getChildren().add(slot);
                 if (j == numberOfColumns - 1 && i != 0) {
-                    Hint hint = new Hint();
+                    Hint hint = new Hint(numberOfColumns);
                     hint.setTranslateX(j * 60 * 1.4);
                     hint.setTranslateY(i * 60);
                     getChildren().add(hint);
@@ -80,8 +79,7 @@ public class Board extends Pane {
                 Message message = new Message("Do you wanna try again?");
                 message.messageShow();
                 if (message.isNewGame()) {
-                    System.out.println("Banana");
-                    prepareBoard();
+                  prepareBoard();
                 }
 
             }
