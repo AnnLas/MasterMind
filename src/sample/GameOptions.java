@@ -21,7 +21,7 @@ public class GameOptions {
     public GameOptions() {
         Scene scene = new Scene(new Group(), 500, 100);
         int[] rowOptions = new int[]{3, 4, 5, 6, 7, 8, 9, 10};
-        playerOptions = new String[]{"One Player", "Two Players"};
+        playerOptions = new String[]{"One Player", "Two Players","Computer"};
         List<Integer> choices = new ArrayList<>();
         for (int i : rowOptions) {
             choices.add(i);
@@ -76,6 +76,12 @@ public class GameOptions {
             return false;
         } else
             return true;
+    }
+    public boolean computerSolverGame() {
+        if (numberOfPlayers.valueProperty().get().equals(playerOptions[2])) {
+             return true;
+        } else
+            return false;
     }
 
 }

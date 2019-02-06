@@ -18,7 +18,7 @@ public class Slot extends StackPane {
         setAlignment(Pos.CENTER);
         getChildren().add(image);
         setOnMouseClicked(mouseEvent -> {
-            if (active) {
+            if (active&&!(currentColor==0)) {
                 getChildren().clear();
                 image.setImage(new Image("images/ball" + currentColor + ".png"));
                 getChildren().add(image);

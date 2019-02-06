@@ -10,7 +10,7 @@ public class Controller extends Application {
     public void start(Stage stage) throws Exception {
         GameOptions gameOptions = new GameOptions();
 
-        Board board = new Board(gameOptions.getNumberOfColumns()+1, 4, gameOptions.twoPlayersGame());
+        Board board = new Board(gameOptions.getNumberOfColumns()+1, 4, gameOptions.twoPlayersGame(), gameOptions.computerSolverGame());
         if (gameOptions.twoPlayersGame()) {
             board.setActiveRow(0);
         }

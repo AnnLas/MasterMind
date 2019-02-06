@@ -17,14 +17,17 @@ public class Board extends Pane {
     private ArrayList<Integer> providedCode;
     private Button startGameButton;
     private Boolean twoPlayersGame;
+    private Boolean computerSolver;
+    private Solver solver;
+    private int [] currentHint;
 
-    public Board(int numberOfRows, int numberOfColumns, boolean twoPlayersGame) {
+    public Board(int numberOfRows, int numberOfColumns, boolean twoPlayersGame,boolean computerSolver) {
         game = new Game();
 
         this.twoPlayersGame = twoPlayersGame;
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
-
+        this.computerSolver = computerSolver;
         slots = new Slot[numberOfColumns][numberOfRows];
         hints = new Hint[numberOfRows];
         setPrefSize(600, 600);
@@ -46,16 +49,20 @@ public class Board extends Pane {
 
             }
         }
+        if (computerSolver){
+            solver = new Solver(game);
+        }
 
         addComponents();
 
         if (!twoPlayersGame){
-            twoPlayersGameOption();
+            onePlaterGameOption();
         }
+
 
     }
 
-    private void twoPlayersGameOption() {
+    private void onePlaterGameOption() {
         game.setSecondPlayerTurn(true);
         startGameButton.setText("New game");
         game.setCode(numberOfColumns);
@@ -91,6 +98,14 @@ public class Board extends Pane {
                     for (int i = 0; i < numberOfColumns; i++) {
                         slots[i][0].setHidden();
                     }
+                    if (computerSolver) {
+                        ArrayList <Integer> solverChioce = solver.giveAChoice();
+                        for (int i = 0; i < numberOfColumns; i++) {
+                            slots[i][numberOfRows-1].setDigit(solverChioce.get(i));
+                            slots[i][numberOfRows-1].unHide();
+
+                        }
+                    }
 
                 }
             } else {
@@ -110,6 +125,13 @@ public class Board extends Pane {
             if (game.isSecondPlayerTurn() && checkCorectness() && game.isRunning()) {
                 if (!(activeRow == 1) && !game.isWinner()) {
                     nextRow();
+                    if (computerSolver){
+                    ArrayList <Integer> solverChioce = solver.giveAChoice();
+                        for (int i = 0; i < numberOfColumns; i++) {
+                            slots[i][activeRow].setDigit(solverChioce.get(i));
+                            slots[i][activeRow].unHide();
+                        }
+                    }
                 } else {
                     checkCorectness();
                     for (int i = 0; i < numberOfColumns; i++) {
@@ -163,7 +185,8 @@ public class Board extends Pane {
         if (activeRow == 0 && twoPlayersGame) {
             game.setCode(providedCode);
         } else {
-            hints[activeRow].setHint(game.checkMatch(providedCode)[0], game.checkMatch(providedCode)[1]);
+            currentHint = game.checkMatch(providedCode);
+            hints[activeRow].setHint(currentHint[0], currentHint[1]);
         }
         return true;
     }
@@ -193,6 +216,9 @@ public class Board extends Pane {
 
     public void prepareBoard() {
         game = new Game();
+        if (computerSolver){
+            solver = new Solver(game);
+        }
 
         activeRow = 0;
         for (int i = 0; i < numberOfRows; i++) {
@@ -211,7 +237,7 @@ public class Board extends Pane {
         }
         startGameButton.setText("Start");
         if (!twoPlayersGame){
-            twoPlayersGameOption();
+            onePlaterGameOption();
         }
         setActiveRow(activeRow);
 
