@@ -7,6 +7,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
+/**
+ * Represents board of the game. Where players are putting pegs into slots.
+ * Part of UI.
+ */
 public class Board extends Pane {
     private int numberOfRows;
     private int numberOfColumns;
@@ -21,6 +25,13 @@ public class Board extends Pane {
     private Solver solver;
     private int [] currentHint;
 
+    /**
+     * Creates instance of the Board.
+     * @param numberOfRows number of rows of the board
+     * @param numberOfColumns number od columns of the board
+     * @param twoPlayersGame if two players play the game
+     * @param computerSolver if computer solve breaks the code
+     */
     public Board(int numberOfRows, int numberOfColumns, boolean twoPlayersGame,boolean computerSolver) {
         game = new Game();
 
@@ -56,13 +67,14 @@ public class Board extends Pane {
         addComponents();
 
         if (!twoPlayersGame){
-            onePlaterGameOption();
+            onePlayerGameOption();
         }
 
 
     }
 
-    private void onePlaterGameOption() {
+
+    private void onePlayerGameOption() {
         game.setSecondPlayerTurn(true);
         startGameButton.setText("New game");
         game.setCode(numberOfColumns);
@@ -201,6 +213,10 @@ public class Board extends Pane {
         setActiveRow(activeRow);
     }
 
+    /**
+     * Make one of the row acive (player can put pegs into).
+     * @param activeRow number of the active row
+     */
     public void setActiveRow(int activeRow) {
         this.activeRow = activeRow;
         for (int i = 0; i < numberOfRows; i++) {
@@ -214,7 +230,7 @@ public class Board extends Pane {
         }
     }
 
-    public void prepareBoard() {
+    private void prepareBoard() {
         game = new Game();
         if (computerSolver){
             solver = new Solver(game);
@@ -237,7 +253,7 @@ public class Board extends Pane {
         }
         startGameButton.setText("Start");
         if (!twoPlayersGame){
-            onePlaterGameOption();
+            onePlayerGameOption();
         }
         setActiveRow(activeRow);
 

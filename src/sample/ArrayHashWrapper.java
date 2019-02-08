@@ -3,10 +3,17 @@ package sample;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Wraps ArrayList for comparison. It is used to provide only unique codes to hashset.
+ * Equals() and Hashcode() methods overriden to control hash calculation and comparison.
+ */
 public class ArrayHashWrapper {
     private ArrayList<Integer> list;
 
-
+    /**
+     * Creates an instance of the ArrayHashWrapper which array to be wrapped
+     * @param list array to be wrapped
+     */
     public ArrayHashWrapper(ArrayList<Integer> list) {
         this.list = list;
     }
@@ -40,10 +47,18 @@ public class ArrayHashWrapper {
         return result;
     }
 
+    /**
+     * Returns wrapped array
+     * @return wrapped array
+     */
     public ArrayList<Integer> getList() {
         return list;
     }
 
+    /**
+     * Sets array to be wrapped
+     * @param list array to be wrapped
+     */
     public void setList(ArrayList<Integer> list) {
         this.list = list;
     }

@@ -4,11 +4,18 @@ import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-
+/**
+ * Fragment of the UI which represents hint after comparison of two codes
+ * (given by a codebreaker, and code to be break)
+ * Red balls represents perfect match, grey only color match.
+ */
 public class Hint extends GridPane {
     private int numberOfDigits = 4;
 
-
+    /**
+     * Creates instance of the Hint
+     * @param digitsNumber number of the slots in hint.
+     */
     public Hint(int digitsNumber) {
         this.numberOfDigits = digitsNumber;
         setAlignment(Pos.CENTER);
@@ -20,6 +27,11 @@ public class Hint extends GridPane {
         }
     }
 
+    /**
+     * Sets hint after comparison
+     * @param sameDigits number of perfect matched digits
+     * @param samePositionAndDigits number of only color matched digits
+     */
     public void setHint(int sameDigits, int samePositionAndDigits) {
         System.out.println(samePositionAndDigits);
         System.out.println(sameDigits);
@@ -42,6 +54,9 @@ public class Hint extends GridPane {
 
     }
 
+    /**
+     * Clears the hint from the pegs.
+     */
     public void setClear() {
 
         setAlignment(Pos.CENTER);

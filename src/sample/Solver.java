@@ -2,6 +2,12 @@ package sample;
 
 import java.util.*;
 
+/**
+ * It is used to break the code. It is based some kind of Knuths algorithm.
+ * First it creates set of possible codes and then remove from it those which didnt match.
+ * After response about match of the code given by a solver, it compares this code
+ * which rest from the set. Codes which dont give the same match response are removed.
+ */
 public class Solver {
     private HashSet<ArrayList<Integer>> numberCollection;
     private int numberOfDigits = 6;
@@ -9,6 +15,10 @@ public class Solver {
     private Game game;
     private ArrayList <Integer> providedCode;
 
+    /**
+     * Create instance of the Solver and prepares set of all possible codes.
+     * @param game game to solve
+     */
     public Solver(Game game) {
         this.game = game;
         game.setCode(4);
@@ -36,6 +46,10 @@ public class Solver {
 
     }
 
+    /**
+     * Retuns random code from the set of codes.
+     * @return random code from the set of codes
+     */
     public ArrayList<Integer> giveAChoice() {
         providedCode = numberCollection.iterator().next();
         int[] result = game.checkMatch(providedCode);
@@ -65,7 +79,7 @@ public class Solver {
 
     }
 
-    public int[] checkMatch( ArrayList<Integer> secondCode) {
+    private int[] checkMatch( ArrayList<Integer> secondCode) {
         int sameNumbersAndPlaces = 0;
         int sameNumbers = 0;
 

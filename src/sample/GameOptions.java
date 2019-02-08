@@ -10,14 +10,18 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Window which asks about number of players, size of the board and if computer will be a solver.
+ */
 public class GameOptions {
     private int choice = 6;
     private ComboBox numberOfPlayers;
     private ComboBox numberOfRowsComboBox;
     private String[] playerOptions;
 
-
+    /**
+     * Creates instance of the GameOptions(); And shows the window with questions.
+     */
     public GameOptions() {
         Scene scene = new Scene(new Group(), 500, 100);
         int[] rowOptions = new int[]{3, 4, 5, 6, 7, 8, 9, 10};
@@ -65,18 +69,30 @@ public class GameOptions {
 
     }
 
-
-    public int getNumberOfColumns() {
+    /**
+     * Returns number of rows choosen by a player
+     * @return choosen number of rows
+     */
+    public int getNumberOfRows() {
         choice = (int) numberOfRowsComboBox.valueProperty().get();
         return choice;
     }
 
+    /**
+     * Returns info if single player game or two players game was choosen.
+     * @return info if single player game or two players game was choosen.
+     */
     public boolean twoPlayersGame() {
         if (numberOfPlayers.valueProperty().get().equals(playerOptions[0])) {
             return false;
         } else
             return true;
     }
+
+    /**
+     * Retruns info if computer was choosen to be a codebreaker.
+     * @return info if computer was choosen to be a codebreaker.
+     */
     public boolean computerSolverGame() {
         if (numberOfPlayers.valueProperty().get().equals(playerOptions[2])) {
              return true;
